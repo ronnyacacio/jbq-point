@@ -1,18 +1,25 @@
 import nodeSchedule from 'node-schedule';
-import { scoredPoint } from './ScoredPoint';
+import { openNexus } from './OpenNexus';
 
 export function schedulePoint() {
   /**
    * Times when points must be scored
    */
-  const pointHours = [8, 12, 13, 18];
+  const pointHoursDefault = [8, 12, 13, 18];
+  const pointHoursFriday = [8, 12, 13, 17];
 
   nodeSchedule.scheduleJob('0 * * * *', function() {
-    var currentHour = new Date().getHours();
+    const currentDate = new Date();
 
-    var isPointHour = pointHours.includes(currentHour);
+    const currentHour = currentDate.getHours();
+
+    const isFriday = currentDate.getDay() === 5;
+
+    const pointHours = isFriday ? pointHoursFriday : pointHoursDefault;
+
+    const isPointHour = pointHours.includes(currentHour);
 
     if (isPointHour)
-      scoredPoint();
+      openNexus();
   });
 }
