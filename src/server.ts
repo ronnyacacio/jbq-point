@@ -1,9 +1,7 @@
-import 'dotenv/config';
-
 import express from 'express';
 import { schedulePoint } from './lib/SchedulePoint';
 
-const port = process.env.PORT;
+const port = 3333;
 
 const app = express();
 

@@ -8,7 +8,7 @@ export function schedulePoint() {
   const pointHoursDefault = [8, 12, 13, 18];
   const pointHoursFriday = [8, 12, 13, 17];
 
-  nodeSchedule.scheduleJob('0 * * * *', function() {
+  nodeSchedule.scheduleJob('0 * * * *', () => {
     const currentDate = new Date();
 
     const currentHour = currentDate.getHours();
